@@ -10,7 +10,13 @@ peptic <- tibble(
 )
 
 x <- crosstab(peptic$spicy_food, peptic$pud, weight = peptic$counts, 
-         expected = TRUE, chisq = TRUE)
+         expected = TRUE, chisq = TRUE, dnn = c("hi", "hello"))
 
 
 glimpse(x)
+
+x$tab %>% 
+  oddsratio(method = "wald")
+
+
+

@@ -10,6 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(epitools)
+library(DescTools)
+library(descr)
+library(survival)
 
 data(esoph)
 
@@ -32,7 +35,7 @@ htmltools::img(src = knitr::image_uri("../logos/p8120_logo.png"),
 
 The R functions within this document come from a variety of libraries. To use these functions please intsall the following packages by running: 
 
-`install.packages(c("tidyverse", "descr", "descTools", "surival"))` 
+`install.packages(c("tidyverse", "descr", "descTools", "surival", "epitools"))` 
 
 ### Cross-tabulation
 
@@ -71,7 +74,7 @@ Use the following table to locate functions for hypothesis tests. If you are uns
 
 ### Measures of association
 
-| Measure             | R function         | Package
-|---------------------|--------------------|----------
-|Odds ratio (2xk table) | `oddsratio()`    | epitools
-|Risk ratio (2xk table) | `riskratio()`    | epitools
+| Measure               | R function         | Package
+|-----------------------|--------------------|----------
+|Odds ratio (2xk table) | `oddsratio()`      | epitools
+|Risk ratio (2xk table) | `riskratio()`      | epitools
