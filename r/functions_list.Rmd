@@ -37,6 +37,8 @@ The R functions within this document come from a variety of libraries. To use th
 
 `install.packages(c("tidyverse", "descr", "descTools", "surival", "epitools"))` 
 
+In addition, you will need to run, `devtools::install_github("nt-williams/catfun")`
+
 ### Cross-tabulation
 
 To create sparse cross-tabulations use the function `xtabs()`
@@ -78,3 +80,4 @@ Use the following table to locate functions for hypothesis tests. If you are uns
 |-----------------------|--------------------|----------
 |Odds ratio (2xk table) | `oddsratio()`      | epitools
 |Risk ratio (2xk table) | `riskratio()`      | epitools
+|Risk difference        | `riskdiff()`       | catfun

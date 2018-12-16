@@ -131,6 +131,7 @@ $(document).ready(function () {
 <p><br></p>
 <p>The R functions within this document come from a variety of libraries. To use these functions please intsall the following packages by running:</p>
 <p><code>install.packages(c(&quot;tidyverse&quot;, &quot;descr&quot;, &quot;descTools&quot;, &quot;surival&quot;, &quot;epitools&quot;))</code></p>
+<p>In addition, you will need to run, <code>devtools::install_github(&quot;nt-williams/catfun&quot;)</code></p>
 <div id="cross-tabulation" class="section level3">
 <h3>Cross-tabulation</h3>
 <p>To create sparse cross-tabulations use the function <code>xtabs()</code></p>
@@ -234,6 +235,11 @@ $(document).ready(function () {
 <td>Risk ratio (2xk table)</td>
 <td><code>riskratio()</code></td>
 <td>epitools</td>
+</tr>
+<tr class="odd">
+<td>Risk difference</td>
+<td><code>riskdiff()</code></td>
+<td>catfun</td>
 </tr>
 </tbody>
 </table>

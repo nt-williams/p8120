@@ -53,13 +53,9 @@ riskdiff <- function(x, y = NULL, weight = NULL, conf.level = 0.95,
 # examples
 x <- xtabs(~ aids + azt, data = azt)
 riskdiff(x = x, rev = "b")
-
 riskdiff(x = x, y = azt$azt)
-
 riskdiff(x = azt$aids, y = azt$azt, conf.level = 0.99, rev = "b")
-
-riskdiff(x = azt$aids, y = azt$azt, conf.level = 0.99, rev = "b", dnn = c("hi", "hello"))
-
+riskdiff(x = azt$aids, y = azt$azt, conf.level = 0.99, rev = "b", dnn = c("AZT", "AIDS"))
 riskdiff(x = esoph$alcgp, y = esoph$agegp, weight = esoph$ncontrols)
 
 
