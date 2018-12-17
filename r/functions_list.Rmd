@@ -81,3 +81,7 @@ Use the following table to locate functions for hypothesis tests. If you are uns
 |Odds ratio (2xk table) | `oddsratio()`      | epitools
 |Risk ratio (2xk table) | `riskratio()`      | epitools
 |Risk difference        | `riskdiff()`       | catfun
+
+### Power
+
+Fun
