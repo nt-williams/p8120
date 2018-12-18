@@ -21,6 +21,7 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
       se <- sqrt(p_mle * (1 - p_mle) / n)
       z_cv <- qnorm(0.5 * (1 + conf.level))
       ci <- p_mle + c(-1, 1) * z_cv * se
+      attr(ci, "conf.level") <- conf.level
       
       if (!is.null(p)) {
         statistic <- (p_mle - p) / se
@@ -39,7 +40,7 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
     }
     vals <- list(null.value = p, alternative = alternative, method = method, 
                  estimate = p_mle, data.name = "Test", statistic = statistic, 
-                 parameter = parameter, p.value = 0.5)
+                 parameter = parameter, p.value = 0.5, conf.int = ci)
     class(vals) <- "htest"
     print(vals)
     
