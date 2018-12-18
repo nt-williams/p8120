@@ -31,6 +31,11 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
         statistic <- (p_mle - p) / se
         
       }
+      
+      if (any(n*p < 5, n*p*(1 - p))) {
+        warning("Normal approximation may be incorrect. Consider using exact method")
+      } 
+      
       names(statistic) <- "Z"
       names(p) <- "proportion"
       
