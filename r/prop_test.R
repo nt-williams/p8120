@@ -7,7 +7,6 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
   alternative <- match.arg(alternative)
   parameter <- 1
   names(parameter) <- "df"
-  names(p) <- "proportion"
   
   if (method == "wald") {
     if (correct) {
@@ -20,27 +19,34 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
       
       se <- sqrt(p_mle * (1 - p_mle) / n)
       z_cv <- qnorm(0.5 * (1 + conf.level))
-      ci <- p_mle + c(-1, 1) * z_cv * se
+      ci <- round(p_mle + c(-1, 1) * z_cv * se, 4)
       attr(ci, "conf.level") <- conf.level
       
       if (!is.null(p)) {
         statistic <- (p_mle - p) / se
       } else {
-        statistic <- (p_mle - 0.5) / se
+        p <- 0.5
+        statistic <- (p_mle - p) / se
+        
       }
-      names(statistic) <- "Chi-squared"
+      names(statistic) <- "Z"
+      names(p) <- "proportion"
       
-      # if (alternative == "two.sided") {
-      #   
-      # } else if (alternative == "less") {
-      #   
-      # } else if (alternative == "greater") {
-      #   
-      # }
+      if (alternative == "two.sided") {
+        if (statistic < 0) {
+          p.value <- pnorm(statistic) * 2
+        } else {
+          p.value <- pnorm(statistic, lower.tail = FALSE) * 2
+        }
+      } else if (alternative == "less") {
+        p.value <- pnorm(statistic)
+      } else if (alternative == "greater") {
+        p.value <- pnorm(statistic, lower.tail = FALSE)
+      }
     }
     vals <- list(null.value = p, alternative = alternative, method = method, 
                  estimate = p_mle, data.name = "Test", statistic = statistic, 
-                 parameter = parameter, p.value = 0.5, conf.int = ci)
+                 p.value = p.value, conf.int = ci)
     class(vals) <- "htest"
     print(vals)
     
@@ -53,25 +59,6 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
 prop_test(14, 100, method = "wald")
 prop_test(14, 100, method = "wald", correct = TRUE)
 prop_test(14, 100, method = "wilson")
-prop_test(14, 100)
-prop_test(14, 100, .15)
+prop_test(14, 100, 0.2, alternative = "two.sided")
+test <- prop_test(14, 100, .15)
 prop_test(14, 100, method = "wilson", correct = TRUE)
-
-test <- list(null.value = 0.5, 
-     alternative = "two sided", 
-     method = "1-sample test of proportions", 
-     estimate = p_mle, 
-     data.name = "hello", 
-     statistic = statistic, 
-     parameter = parameter, 
-     p.value = 0.05 
-     )
-
-class(test) <- "htest"
-
-print(test)
-
-parameter <- 5
-names(parameter) <- "hi"
-estimate <- 5
-names(estimate) <- "X-squared"
