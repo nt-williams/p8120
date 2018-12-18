@@ -17,15 +17,17 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
       p_mle <- x / n
       names(p_mle) <- "MLE proportion"
       
-      se <- sqrt(p_mle * (1 - p_mle) / n)
+      se_ci <- sqrt(p_mle * (1 - p_mle) / n)
       z_cv <- qnorm(0.5 * (1 + conf.level))
-      ci <- round(p_mle + c(-1, 1) * z_cv * se, 4)
+      ci <- round(p_mle + c(-1, 1) * z_cv * se_ci, 4)
       attr(ci, "conf.level") <- conf.level
       
       if (!is.null(p)) {
+        se <- sqrt(p * (1 - p) / n)
         statistic <- (p_mle - p) / se
       } else {
         p <- 0.5
+        se <- sqrt(p * (1 - p) / n)
         statistic <- (p_mle - p) / se
         
       }
@@ -56,6 +58,7 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
   }
 }
 
+prop_test(2, 6)
 prop_test(14, 100, method = "wald")
 prop_test(14, 100, method = "wald", correct = TRUE)
 prop_test(14, 100, method = "wilson")
