@@ -19,7 +19,7 @@ htmltools::img(src = knitr::image_uri("../logos/p8120_logo.png"),
 
 ### Getting started
 
-This document is intended to be used as a guide to SAS for P8120 (Analysis of Categorical Data). This document is not exhaustive; please consult one of the TA's, Dr. Mauro, or the online SAS user guide for more help if needed. SAS is available on all computers at CUMC or can be purchased through the IT department with a student discount (Windows computers only).
+This document is intended to be used as a guide to SAS for P8120 (Analysis of Categorical Data). This document is not exhaustive; please consult one of the TA's, Dr. Mauro, or the online SAS user [guide](https://support.sas.com/documentation/cdl/en/statug/63962/HTML/default/viewer.htm#titlepage.htm) for more help if needed. SAS is available on all computers at CUMC or can be purchased through the IT department with a student discount (Windows computers only).
 
 SAS is a powerful statistical software and programming language commonly used in universities, government, and the private sector. Programming in SAS can roughly be broken down into two sections: data steps (begun by a `data` statement) and statistical procedures (begun by a `proc` statement). Almost all code blocks in SAS begin with one of these two statements and almost all code blocks are ended with `run;`. Within code blocks, arguments in SAS are ended with a semicolon. 
 
@@ -27,7 +27,7 @@ SAS is a powerful statistical software and programming language commonly used in
 
 Importing data in SAS can be done a couple of different ways. We recommend using one of two methods: the import procedure or a data step. 
 
-The import procedure is the most straightforward way of importing data into SAS. The procedure requires two arguments and a third optional requirement is recommended: `out`, `datafile`, and `dbms`. The `out` argument specifies the name of the newly created SAS dataset; the `datafile` argument specifies the complete path for the file containing the data to be imported in quotation marks; the `dbms` argument is optional and specifies the file type to be parsed. The most commonly used identifiers are `csv`, `tab`, `xlsx`, and `dlm`. If importing a csv file, this argument is not necessary. The syntax is as follows: 
+The import procedure is the most straightforward way of importing data into SAS. The procedure requires two arguments and a third optional requirement is recommended: `out`, `datafile`, and `dbms`. The `out` argument specifies the name of the newly created SAS dataset; the `datafile` argument specifies the complete path for the file containing the data to be imported in quotation marks; the `dbms` argument is optional and specifies the file type to be parsed. The most commonly used identifiers are `csv`, `tab`, `xlsx`, and `dlm`. If importing a csv file, this argument is not necessary. Further help can be found [here](http://support.sas.com/documentation/cdl/en/proc/65145/HTML/default/viewer.htm#n18jyszn33umngn14czw2qfw7thc.htm). The syntax is as follows: 
 
 ```{}
 proc import out = <SAS dataset name>
@@ -55,13 +55,15 @@ run;
 
 Use the following table to locate procedures for hypothesis tests. If you are unsure of the usage of a procedure, refer to the online SAS guide.
 
-|Hypothesis test                     | SAS procedure                  | SAS User manual |
-|------------------------------------|--------------------------------|-----------------|
-|One/two sample test proportions, normal approximation  ||  |
-|One/two sample test proportions, exact   |            |  |
-|Confidence intervals, proportions   | |  |
-|Chi-squared                         || |
-|Fisher's exact                      || |
+|Hypothesis test                     | SAS procedure                  | Arguments needed | Lecture number |
+|------------------------------------|--------------------------------|------------------|-----------------|
+|One sample test proportions, normal approximation  | `proc freq` | `binomial(p = <insert null>)` |
+|One sample test proportions, exact   |     `proc freq`       | Same as normal approx., also requires `exact binomial` |
+|Confidence intervals, proportions   | `proc freq` | Same as normal and exact tests |
+|Chi-squared                         | `proc freq` | `chisq expected` |
+|Fisher's exact                      | `proc freq` | Same as chi-squared test |
+|Likelihood ratio test               | `proc freq` | Same as chi-squared test |
+|Two sample test of proportions      | `proc freq` | `expected riskdiff(equal var = null)` |
 |McNemar's test                      || |
 |Logistic regression                 | `proc logistic` |  |
 |GOF & Hosmer Lemeshow               | | |
@@ -71,10 +73,10 @@ Use the following table to locate procedures for hypothesis tests. If you are un
 
 ### Measures of association
 
-| Measure               | SAS procedure      | SAS User manual |
-|-----------------------|--------------------|-----------------|
-|Odds ratio (2xk table) |     | |
-|Risk ratio (2xk table) |     | |
-|Risk difference        |     | |
+| Measure               | SAS procedure      | Arguments needed | Lecture number  |
+|-----------------------|--------------------|------------------|-----------------|
+|Odds ratio (2xk table) | `proc freq`        | `relrisk`        |
+|Risk ratio (2xk table) | `proc freq`        | `relrisk`        |
+|Risk difference        | `proc freq`        | `riskdiff`       |
 ### Power
 

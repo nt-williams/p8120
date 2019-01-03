@@ -131,13 +131,13 @@ $(document).ready(function () {
 <p><br></p>
 <div id="getting-started" class="section level3">
 <h3>Getting started</h3>
-<p>This document is intended to be used as a guide to SAS for P8120 (Analysis of Categorical Data). This document is not exhaustive; please consult one of the TA’s, Dr. Mauro, or the online SAS user guide for more help if needed. SAS is available on all computers at CUMC or can be purchased through the IT department with a student discount (Windows computers only).</p>
+<p>This document is intended to be used as a guide to SAS for P8120 (Analysis of Categorical Data). This document is not exhaustive; please consult one of the TA’s, Dr. Mauro, or the online SAS user <a href="https://support.sas.com/documentation/cdl/en/statug/63962/HTML/default/viewer.htm#titlepage.htm">guide</a> for more help if needed. SAS is available on all computers at CUMC or can be purchased through the IT department with a student discount (Windows computers only).</p>
 <p>SAS is a powerful statistical software and programming language commonly used in universities, government, and the private sector. Programming in SAS can roughly be broken down into two sections: data steps (begun by a <code>data</code> statement) and statistical procedures (begun by a <code>proc</code> statement). Almost all code blocks in SAS begin with one of these two statements and almost all code blocks are ended with <code>run;</code>. Within code blocks, arguments in SAS are ended with a semicolon.</p>
 </div>
 <div id="importing-data-and-manipulation" class="section level3">
 <h3>Importing data and manipulation</h3>
 <p>Importing data in SAS can be done a couple of different ways. We recommend using one of two methods: the import procedure or a data step.</p>
-<p>The import procedure is the most straightforward way of importing data into SAS. The procedure requires two arguments and a third optional requirement is recommended: <code>out</code>, <code>datafile</code>, and <code>dbms</code>. The <code>out</code> argument specifies the name of the newly created SAS dataset; the <code>datafile</code> argument specifies the complete path for the file containing the data to be imported in quotation marks; the <code>dbms</code> argument is optional and specifies the file type to be parsed. The most commonly used identifiers are <code>csv</code>, <code>tab</code>, <code>xlsx</code>, and <code>dlm</code>. If importing a csv file, this argument is not necessary. The syntax is as follows:</p>
+<p>The import procedure is the most straightforward way of importing data into SAS. The procedure requires two arguments and a third optional requirement is recommended: <code>out</code>, <code>datafile</code>, and <code>dbms</code>. The <code>out</code> argument specifies the name of the newly created SAS dataset; the <code>datafile</code> argument specifies the complete path for the file containing the data to be imported in quotation marks; the <code>dbms</code> argument is optional and specifies the file type to be parsed. The most commonly used identifiers are <code>csv</code>, <code>tab</code>, <code>xlsx</code>, and <code>dlm</code>. If importing a csv file, this argument is not necessary. Further help can be found <a href="http://support.sas.com/documentation/cdl/en/proc/65145/HTML/default/viewer.htm#n18jyszn33umngn14czw2qfw7thc.htm">here</a>. The syntax is as follows:</p>
 <pre><code>proc import out = &lt;SAS dataset name&gt;
             datafile = &quot;filepath&quot;
             dbms = &lt;identifier&gt; replace;
@@ -156,41 +156,66 @@ run; </code></pre>
 <h3>Hypothesis tests</h3>
 <p>Use the following table to locate procedures for hypothesis tests. If you are unsure of the usage of a procedure, refer to the online SAS guide.</p>
 <table>
+<colgroup>
+<col width="34%"></col>
+<col width="30%"></col>
+<col width="17%"></col>
+<col width="16%"></col>
+</colgroup>
 <thead>
 <tr class="header">
 <th>Hypothesis test</th>
 <th>SAS procedure</th>
-<th>SAS User manual</th>
+<th>Arguments needed</th>
+<th>Lecture number</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>One/two sample test proportions, normal approximation</td>
-<td></td>
+<td>One sample test proportions, normal approximation</td>
+<td><code>proc freq</code></td>
+<td><code>binomial(p = &lt;insert null&gt;)</code></td>
 <td></td>
 </tr>
 <tr class="even">
-<td>One/two sample test proportions, exact</td>
-<td></td>
+<td>One sample test proportions, exact</td>
+<td><code>proc freq</code></td>
+<td>Same as normal approx., also requires <code>exact binomial</code></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>Confidence intervals, proportions</td>
-<td></td>
+<td><code>proc freq</code></td>
+<td>Same as normal and exact tests</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>Chi-squared</td>
-<td></td>
+<td><code>proc freq</code></td>
+<td><code>chisq expected</code></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>Fisher’s exact</td>
+<td><code>proc freq</code></td>
+<td>Same as chi-squared test</td>
 <td></td>
+</tr>
+<tr class="even">
+<td>Likelihood ratio test</td>
+<td><code>proc freq</code></td>
+<td>Same as chi-squared test</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Two sample test of proportions</td>
+<td><code>proc freq</code></td>
+<td><code>expected riskdiff(equal var = null)</code></td>
 <td></td>
 </tr>
 <tr class="even">
 <td>McNemar’s test</td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -198,9 +223,11 @@ run; </code></pre>
 <td>Logistic regression</td>
 <td><code>proc logistic</code></td>
 <td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>GOF &amp; Hosmer Lemeshow</td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -208,14 +235,17 @@ run; </code></pre>
 <td>Conditional logistic regression</td>
 <td></td>
 <td></td>
+<td></td>
 </tr>
 <tr class="even">
 <td>Cochran Armitage Trend test</td>
 <td></td>
 <td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>Brewlow Day test</td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -229,23 +259,27 @@ run; </code></pre>
 <tr class="header">
 <th>Measure</th>
 <th>SAS procedure</th>
-<th>SAS User manual</th>
+<th>Arguments needed</th>
+<th>Lecture number</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Odds ratio (2xk table)</td>
-<td></td>
+<td><code>proc freq</code></td>
+<td><code>relrisk</code></td>
 <td></td>
 </tr>
 <tr class="even">
 <td>Risk ratio (2xk table)</td>
-<td></td>
+<td><code>proc freq</code></td>
+<td><code>relrisk</code></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>Risk difference</td>
-<td></td>
+<td><code>proc freq</code></td>
+<td><code>riskdiff</code></td>
 <td></td>
 </tr>
 </tbody>
