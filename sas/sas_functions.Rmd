@@ -17,9 +17,13 @@ htmltools::img(src = knitr::image_uri("../logos/p8120_logo.png"),
 
 <br>
 
-This document is intended to be used as a guide to SAS for P8120 (Analysis of Categorical Data). This document is not exhaustive; please consult one of the TA's, Dr. Mauro, or the online SAS user guide for more help if needed. 
+### Getting started
 
-### Importing data
+This document is intended to be used as a guide to SAS for P8120 (Analysis of Categorical Data). This document is not exhaustive; please consult one of the TA's, Dr. Mauro, or the online SAS user guide for more help if needed. SAS is available on all computers at CUMC or can be purchased through the IT department with a student discount (Windows computers only).
+
+SAS is a powerful statistical software and programming language commonly used in universities, government, and the private sector. Programming in SAS can roughly be broken down into two sections: data steps (begun by a `data` statement) and statistical procedures (begun by a `proc` statement). Almost all code blocks in SAS begin with one of these two statements and almost all code blocks are ended with `run;`. Within code blocks, arguments in SAS are ended with a semicolon. 
+
+### Importing data and manipulation
 
 Importing data in SAS can be done a couple of different ways. We recommend using one of two methods: the import procedure or a data step. 
 
@@ -29,35 +33,48 @@ The import procedure is the most straightforward way of importing data into SAS.
 proc import out = <SAS dataset name>
             datafile = "filepath"
             dbms = <identifier> replace;
+run; 
 ```
 
-The data step in SAS is where all data manipulation occurs, this includes being able to import data. 
+The data step in SAS is where all data manipulation occurs, this includes being able to import data. While using a data step to import data is more complicated, it offers the user more control over the import process. The first argument to any data step is the name of the dataset you are creating. When importing a datafile, the next argument is `infile` followed by the full path to the data on your computer, the `delimiter` argument which specifies the delimiter used to separate values (',' for a csv), the `missover` argument, the `firstobs` argument (if a file already has variable names in it set this to 2, otherwise set to 1), and `DSD`. Following the infile argument is the `input` argument where you can specify variable names and whether or not they should be treated as numeric or categorical variables; if a variable should be treated as categorical, it's name is followed by a $. The synatix is as follows: 
+
+```{}
+data <insert SAS dataset name>
+  infile 'file path'
+    delimiter = ','
+    missover
+    firstobs = 2
+    DSD; 
+  input <name of a numeric variable> <name of a categorical variable> $; 
+run; 
+```
+
 
 
 ### Hypothesis tests
 
 Use the following table to locate procedures for hypothesis tests. If you are unsure of the usage of a procedure, refer to the online SAS guide.
 
-|Hypothesis test                     | SAS procedure                  |
-|------------------------------------|--------------------------------|
-|One/two sample test proportions, normal approximation  || 
-|One/two sample test proportions, exact   |            | 
-|Confidence intervals, proportions   | | 
-|Chi-squared                         ||
-|Fisher's exact                      ||
-|McNemar's test                      ||
-|Logistic regression                 | `proc logistic` | 
-|GOF & Hosmer Lemeshow               | |
-|Conditional logistic regression     | | 
-|Cochran Armitage Trend test         | | 
-|Brewlow Day test                    | | 
+|Hypothesis test                     | SAS procedure                  | SAS User manual |
+|------------------------------------|--------------------------------|-----------------|
+|One/two sample test proportions, normal approximation  ||  |
+|One/two sample test proportions, exact   |            |  |
+|Confidence intervals, proportions   | |  |
+|Chi-squared                         || |
+|Fisher's exact                      || |
+|McNemar's test                      || |
+|Logistic regression                 | `proc logistic` |  |
+|GOF & Hosmer Lemeshow               | | |
+|Conditional logistic regression     | |  |
+|Cochran Armitage Trend test         | |  |
+|Brewlow Day test                    | |  |
 
 ### Measures of association
 
-| Measure               | SAS procedure      |
-|-----------------------|--------------------|
-|Odds ratio (2xk table) |     |
-|Risk ratio (2xk table) |     |
-|Risk difference        |     |
+| Measure               | SAS procedure      | SAS User manual |
+|-----------------------|--------------------|-----------------|
+|Odds ratio (2xk table) |     | |
+|Risk ratio (2xk table) |     | |
+|Risk difference        |     | |
 ### Power
 
